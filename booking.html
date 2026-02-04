@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Safari - JasperWild</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --primary-color: #8B5A2B;
+            --secondary-color: #2C3E50;
+            --accent-color: #E67E22;
+            --page-bg: #F5F5DC; /* Beige Background */
+            --white: #ffffff;
+            --header-height: 70px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: var(--page-bg); /* Applied Beige Here */
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
+
+        /* --- Animations Utilities --- */
+        .reveal-element {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up {
+            transform: translateY(60px);
+        }
+
+        .zoom-in {
+            transform: scale(0.9);
+        }
+
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* --- Header --- */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            color: var(--secondary-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Section 1: Packages --- */
+        #packages {
+            padding: 80px 20px;
+            background-color: transparent; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .package-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #ddd;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .package-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .card-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #6d4520;
+        }
+
+        /* --- Section 2: Booking Form --- */
+        #booking {
+            padding: 80px 20px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/seed/jungleform/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .booking-wrapper {
+            background: #fff;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .form-header p {
+            color: #666;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+            background-color: #fafafa;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        /* --- Date Picker Styling --- */
+        input[type="date"] {
+            cursor: pointer;
+            min-height: 46px; /* Consistent height */
+        }
+
+        /* Tinting the calendar icon to match the theme */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0.6;
+            filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(357deg) brightness(91%) contrast(87%);
+            width: 20px;
+            height: 20px;
+            position: relative;
+            margin-left: 10px;
+            /* Removed pointer-events: none; to fix clicking issue */
+        }
+
+        .selected-package-badge {
+            background-color: rgba(230, 126, 34, 0.1);
+            color: var(--accent-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #6d4520;
+        }
+
+        /* --- Toast Notification --- */
+        #notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(200%);
+            transition: transform 0.4s ease;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #notification.show {
+            transform: translateX(0);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            margin-top: 0;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .booking-wrapper { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-paw"></i> JasperWild
+            </a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Section 1: Packages -->
+    <section id="packages">
+        <div class="container">
+            <div class="section-title reveal-element fade-up">
+                <h2>Choose Your Safari</h2>
+                <p>Select a package below to begin your booking</p>
+            </div>
+
+            <div class="packages-grid">
+                <!-- Package 1 -->
+                <div class="package-card reveal-element fade-up">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/elephant/600/400" alt="Savanna Explorer">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 5 Days</span>
+                            <span><i class="fas fa-tag"></i> $1,200</span>
+                        </div>
+                        <h3 class="card-title">Savanna Explorer</h3>
+                        <p class="card-desc">A classic journey through the open plains. See elephants, lions, and giraffes in their natural habitat.</p>
+                        <button class="btn book-now-btn" data-package="Savanna Explorer">Book This Package</button>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="package-card reveal-element fade-up" style="transition-delay: 0.1s;">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/lion/600/400" alt="Predator Special">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 7 Days</span>
+                            <span><i class="fas fa-tag"></i> $1,800</span>
+                        </div>
+                        <h3 class="card-title">Predator Special</h3>
+                        <p class="card-desc">Dive deep into the territory of the big cats. Includes night drives and tracking experiences.</p>
+                        <button class="btn book-now-btn" data-package="Predator Special">Book This Package</button>
+                    </div>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="package-card reveal-element fade-up" style="transition-delay: 0.2s;">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/river/600/400" alt="Luxury Escape">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 3 Days</span>
+                            <span><i class="fas fa-tag"></i> $950</span>
+                        </div>
+                        <h3 class="card-title">Luxury River Escape</h3>
+                        <p class="card-desc">Relax in high-end lodges overlooking the river. Perfect for couples and relaxation seekers.</p>
+                        <button class="btn book-now-btn" data-package="Luxury River Escape">Book This Package</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Booking Form -->
+    <section id="booking">
+        <div class="container">
+            <div class="booking-wrapper reveal-element zoom-in">
+                <div class="form-header">
+                    <h2>Reservation Form</h2>
+                    <p>Fill in the details below. We will contact you shortly.</p>
+                </div>
+
+                <!-- Visual Confirmation Badge -->
+                <div id="packageBadge" class="selected-package-badge">
+                    <i class="fas fa-check-circle"></i> Selected: <span id="packageNameDisplay"></span>
+                </div>
+
+                <form id="bookingForm" action="https://formspree.io/f/xdadqbwp" method="POST">
+                    <!-- Row 1: Personal Info -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2: Contact Details -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 234 567 890">
+                        </div>
+                        <div class="form-group">
+                            <label for="persons">Number of Persons</label>
+                            <input type="number" id="persons" name="persons" min="1" required placeholder="2">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Dates (From & To) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date-from">Check-in Date (From)</label>
+                            <input type="date" id="date-from" name="date-from" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date-to">Check-out Date (To)</label>
+                            <input type="date" id="date-to" name="date-to" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Package Selection -->
+                    <div class="form-group">
+                        <label for="package-select">Select Package</label>
+                        <select id="package-select" name="package" required>
+                            <option value="" disabled selected>Choose a package...</option>
+                            <option value="Savanna Explorer">Savanna Explorer (5 Days)</option>
+                            <option value="Predator Special">Predator Special (7 Days)</option>
+                            <option value="Luxury River Escape">Luxury River Escape (3 Days)</option>
+                            <option value="Custom Inquiry">Custom Inquiry</option>
+                        </select>
+                    </div>
+
+                    <!-- Row 5: Message -->
+                    <div class="form-group">
+                        <label for="message">Additional Requests</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Dietary needs, airport pickup, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Confirm Booking <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 JasperWild Adventures. All Rights Reserved.
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification">
+        <i class="fas fa-check-circle fa-lg"></i>
+        <span>Booking request sent successfully!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Date Logic (New) ---
+            const dateFrom = document.getElementById('date-from');
+            const dateTo = document.getElementById('date-to');
+            
+            // Helper to get today's date in YYYY-MM-DD format
+            const getTodayDate = () => {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            // Prevent selecting past dates for "From"
+            const today = getTodayDate();
+            dateFrom.setAttribute('min', today);
+            dateTo.setAttribute('min', today);
+
+            // Update "To" date minimum when "From" date changes
+            dateFrom.addEventListener('change', (e) => {
+                const startDate = e.target.value;
+                // Set the "To" date min to the selected "From" date
+                dateTo.setAttribute('min', startDate);
+                
+                // Optional: If the user had already selected a "To" date that is now invalid,
+                // you could clear it here, but standard browser validation usually handles the visual error.
+                if (dateTo.value && dateTo.value < startDate) {
+                    dateTo.value = ''; // Clear invalid date
+                }
+            });
+
+
+            // --- 2. Auto-Select Package from URL (External Link) ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedPackage = urlParams.get('p'); // ?p=Savanna%20Explorer
+            const packageSelect = document.getElementById('package-select');
+            const badge = document.getElementById('packageBadge');
+            const badgeName = document.getElementById('packageNameDisplay');
+            const bookingSection = document.getElementById('booking');
+
+            function selectPackage(packageName) {
+                const decodedPackage = decodeURIComponent(packageName);
+                
+                let optionExists = false;
+                for (let i = 0; i < packageSelect.options.length; i++) {
+                    if (packageSelect.options[i].value === decodedPackage) {
+                        packageSelect.selectedIndex = i;
+                        optionExists = true;
+                        break;
+                    }
+                }
+
+                if (optionExists) {
+                    badge.style.display = 'block';
+                    badgeName.innerText = decodedPackage;
+                    bookingSection.scrollIntoView({ behavior: 'smooth' });
+                } else if (decodedPackage) {
+                    packageSelect.value = "Custom Inquiry";
+                    badge.style.display = 'block';
+                    badgeName.innerText = "Custom Inquiry (" + decodedPackage + ")";
+                    bookingSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            if (selectedPackage) {
+                selectPackage(selectedPackage);
+            }
+
+            // --- 3. Intra-Page "Book Now" Buttons ---
+            const bookButtons = document.querySelectorAll('.book-now-btn');
+            
+            bookButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const packageName = this.getAttribute('data-package');
+                    selectPackage(packageName);
+                });
+            });
+
+
+            // --- 4. REPEATING Scroll Animations (Intersection Observer) ---
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } 
+                    else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-element');
+            revealElements.forEach(el => observer.observe(el));
+
+
+            // --- 5. Form Submission Logic (FIXED) ---
+            const form = document.getElementById('bookingForm');
+            const notification = document.getElementById('notification');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Sending...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+
+                const data = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Success logic
+                        notification.classList.add('show');
+                        form.reset();
+                        
+                        // Reset date constraints to today
+                        dateFrom.setAttribute('min', getTodayDate());
+                        dateTo.setAttribute('min', getTodayDate());
+
+                        badge.style.display = 'none'; 
+
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                        }, 4000);
+                    } else {
+                        // Error from Formspree
+                        response.json().then(data => {
+                            if (Object.hasOwn(data, 'errors')) {
+                                alert(data["errors"].map(error => error["message"]).join(", "));
+                            } else {
+                                alert("Oops! There was a problem submitting your form");
+                            }
+                        })
+                    }
+                }).catch(error => {
+                    // Network error
+                    alert("Oops! There was a problem submitting your form");
+                }).finally(() => {
+                    // Reset button state regardless of outcome
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

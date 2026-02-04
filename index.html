@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization -->
+    <title>UDAWALAWA SAFARI | Sri Lanka Wildlife Tours - SafariLife</title>
+    <meta name="description" content="Experience the best Udawalawa Safari with SafariLife. Witness majestic elephants in Udawalawa National Park, Sri Lanka. Book your wildlife adventure today.">
+    <meta name="keywords" content="Udawalawa Safari, Sri Lanka Wildlife, Udawalawa National Park, Safari Tours, Elephant Safari, SafariLife Adventures">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-color: #8B5A2B; /* Earthy Brown */
+            --secondary-color: #2C3E50; /* Dark Blue-Grey */
+            --accent-color: #E67E22; /* Safari Orange */
+            --light-bg: #F9F9F9;
+            --text-color: #333;
+            --white: #ffffff;
+            --header-height: 80px;
+            --booking-blue: #003580; /* Booking.com Brand Color */
+            --tripadvisor-green: #00AF87; /* TripAdvisor Brand Color */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--white);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 90, 43, 0.3);
+        }
+
+        /* Specific style for the Packages button in Hero */
+        .btn-hero {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            animation: pulse-btn 2s infinite;
+        }
+
+        .btn-hero:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-hero::before {
+            background-color: var(--white);
+        }
+
+        @keyframes pulse-btn {
+            0% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(230, 126, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 126, 34, 0); }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- Preloader Animation --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .loader-bar-container {
+            width: 200px;
+            height: 4px;
+            background-color: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.3s forwards;
+        }
+
+        .loader-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-color);
+            animation: loadProgress 2s ease-in-out 0.5s forwards;
+        }
+
+        @keyframes loadProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* --- Header --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Social Buttons - Round & Small with Tooltip UNDERNEATH */
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s;
+            font-size: 1rem;
+            position: relative; /* For tooltip positioning */
+        }
+
+        .social-btn span {
+            display: none;
+        }
+
+        .social-btn.booking { background-color: var(--booking-blue); }
+        .social-btn.tripadvisor { background-color: var(--tripadvisor-green); } /* Green */
+        .social-btn.whatsapp { background-color: #25D366; }
+        .social-btn.facebook { background-color: #1877F2; }
+
+        /* Custom "T" Letter Style for TripAdvisor - WHITE */
+        .ta-letter {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff; /* White */
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            opacity: 0.9;
+        }
+
+        /* Tooltip Popup Animation - NOW UNDERNEATH */
+        .social-btn::after {
+            content: attr(data-name);
+            position: absolute;
+            top: 120%; /* UNDER THE button */
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            z-index: 10;
+        }
+        
+        /* Arrow for tooltip - Pointing UP */
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 110%; /* Positioned just above THE text */
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #333 transparent;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .social-btn:hover::after,
+        .social-btn:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Slideshow Background */
+        .slider-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            transform: scale(1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            /* Ken Burns Effect: Slow Zoom */
+            animation: kenBurns 10s linear forwards;
+        }
+
+        @keyframes kenBurns {
+            from { transform: scale(1); }
+            to { transform: scale(1.15); }
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5); /* Darken image for text readability */
+        }
+
+        /* Left Side Content */
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            /* Moved FULLY LEFT - Changed from 15vw to 20px */
+            padding-left: 20px; 
+            max-width: 650px;
+            color: var(--white);
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 1s ease-out 2.2s forwards;
+        }
+
+        .about-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+            color: rgba(255,255,255, 0.9);
+            font-weight: 300;
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Slider Dots Control */
+        .slider-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.3);
+        }
+
+        .dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* --- Packages Section --- */
+        #packages {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .package-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .card-desc {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        /* --- Blog Section --- */
+        #blog {
+            padding: 100px 0;
+            background-color: var(--light-bg);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+
+        .blog-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            line-height: 1.4;
+        }
+
+        .blog-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .read-more i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--accent-color);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: #ccc;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .social-footer {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-footer a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .social-footer a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer TripAdvisor Style Override - Matches other bottom buttons (semi-transparent) + White T */
+        .social-footer a.tripadvisor {
+            background-color: rgba(255,255,255,0.1); 
+        }
+        /* Ensuring White T is visible on semi-transparent background */
+        .social-footer a.tripadvisor:hover {
+             background-color: var(--accent-color);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* --- Scroll Animations (Modern Retriggering) --- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-zoom {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Active State for Animation */
+        .reveal-up.active,
+        .reveal-left.active,
+        .reveal-zoom.active {
+            opacity: 1;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+
+        /* Staggered delays for grids */
+        .packages-grid .package-card:nth-child(1) { transition-delay: 0.1s; }
+        .packages-grid .package-card:nth-child(2) { transition-delay: 0.2s; }
+        .packages-grid .package-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* --- Media Queries --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: var(--header-height);
+                gap: 0;
+                flex-direction: column;
+                background-color: var(--primary-color); /* Dark Brown - No Transparent */
+                color: #ffffff; /* White text */
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                text-align: center;
+                transition: 0.4s;
+                padding-top: 50px;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            /* Ensure Nav Links are White inside Brown Menu */
+            .nav-link {
+                color: #ffffff;
+            }
+            .nav-link:hover {
+                color: #ffffff;
+            }
+            .nav-link::after {
+                background-color: #ffffff;
+            }
+
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            /* SHOW Social Icons on Mobile (TripAdvisor Removed) */
+            .social-item {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            /* Mobile padding adjustment to ensure readability */
+            .hero-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* Notification Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 17px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <h2 class="loader-logo">JasperWild</h2>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast">Connecting to Social Media...</div>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-paw"></i> JasperWild
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#packages" class="nav-link">Packages</a></li>
+                <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                <li class="nav-item"><a href="#blog" class="nav-link">Blogs</a></li>
+                <li class="nav-item"><a href="#footer" class="nav-link">Contact</a></li>
+                
+                <!-- Social Buttons (Visible on Desktop AND Mobile) -->
+                <li class="nav-item social-item">
+                    <div class="social-icons">
+                        <a href="#" class="social-btn whatsapp" onclick="showToast('Opening WhatsApp')" data-name="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-btn facebook" onclick="showToast('Opening Facebook')" data-name="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-btn booking" onclick="showToast('Opening Booking.com')" data-name="Booking.com"><i class="fas fa-calendar-check"></i></a>
+                        <!-- TripAdvisor REMOVED FROM HEADER -->
+                    </div>
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="slider-wrapper" id="slider-wrapper">
+            <!-- Slides will be injected by JS -->
+        </div>
+
+        <!-- Left Side Content (Static Overlay) -->
+        <div class="hero-content-wrapper">
+            <div class="container">
+                <!-- Fully Left Aligned -->
+                <div class="hero-content">
+                    <span class="about-label">About Us</span>
+                    <h1 class="hero-title">Experience the Wild <br>Like Never Before</h1>
+                    <p class="hero-desc">
+                        We are dedicated to providing unforgettable Udawalawa Safari experiences. 
+                        Journey into the heart of Sri Lanka's nature with expert guides, luxury accommodations, 
+                        and encounters with majestic elephants.
+                    </p>
+                    <!-- Animated Packages Button -->
+                    <a href="#packages" class="btn btn-hero">View Packages</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="slider-dots">
+            <!-- Dots will be injected by JS -->
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Safari Packages</h2>
+                <p>Choose your perfect adventure in the wild</p>
+            </div>
+
+            <div class="packages-grid">
+                <!-- Package 1 -->
+                <div class="package-card reveal-up">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/elephant/600/400" alt="Udawalawa Elephant Safari">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 5 Days</span>
+                            <span><i class="fas fa-tag"></i> $1,200</span>
+                        </div>
+                        <h3 class="card-title">Savanna Explorer</h3>
+                        <p class="card-desc">A classic journey through the open plains. See elephants, lions, and giraffes in their natural habitat.</p>
+                        <!-- Changed to Link with Query Parameter -->
+                        <a href="booking.html?package=Savanna%20Explorer" class="btn" style="text-align: center;">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="package-card reveal-up">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/lion/600/400" alt="Udawalawa Predator Safari">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 7 Days</span>
+                            <span><i class="fas fa-tag"></i> $1,800</span>
+                        </div>
+                        <h3 class="card-title">Predator Special</h3>
+                        <p class="card-desc">Dive deep into the territory of the big cats. Includes night drives and tracking experiences.</p>
+                        <!-- Changed to Link with Query Parameter -->
+                        <a href="booking.html?package=Predator%20Special" class="btn" style="text-align: center;">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="package-card reveal-up">
+                    <div class="card-img">
+                        <img src="https://picsum.photos/seed/river/600/400" alt="Udawalawa River Safari">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span><i class="far fa-clock"></i> 3 Days</span>
+                            <span><i class="fas fa-tag"></i> $950</span>
+                        </div>
+                        <h3 class="card-title">Luxury River Escape</h3>
+                        <p class="card-desc">Relax in high-end lodges overlooking the river. Perfect for couples and relaxation seekers.</p>
+                        <!-- Changed to Link with Query Parameter -->
+                        <a href="booking.html?package=Luxury%20River%20Escape" class="btn" style="text-align: center;">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Travel Journals</h2>
+                <p>Stories from the wild</p>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Blog 1 -->
+                <div class="blog-card reveal-up">
+                    <div class="blog-img">
+                        <img src="https://picsum.photos/seed/sunset/600/400" alt="Sunset Safari">
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Golden Hour Magic</h3>
+                        <p class="blog-desc">Discover why the hour before sunset offers the best lighting and wildlife activity for photographers.</p>
+                        <a href="https://www.udawalawesafarifun.com/?gad_source=1" target="_blank" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="blog-card reveal-up">
+                    <div class="blog-img">
+                        <img src="https://picsum.photos/seed/jeep/600/400" alt="Packing Tips">
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">What to Pack</h3>
+                        <p class="blog-desc">Essential gear checklist for your first Udawalawa safari adventure. Don't forget the binoculars!</p>
+                        <a href="https://www.udawalawa.com/blog/" target="_blank" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="blog-card reveal-up">
+                    <div class="blog-img">
+                        <img src="https://picsum.photos/seed/zebra/600/400" alt="Sri Lanka">
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">Wonder of Asia</h3>
+                        <p class="blog-desc">
+                            Sri Lanka is a jewel of the Indian Ocean, offering pristine beaches, ancient heritage sites, and lush tea plantations. 
+                            Experience the warm hospitality and diverse wildlife that makes this island paradise a must-visit destination for every traveler.
+                        </p>
+                        <a href="https://snaphappytravel.com/top-things-to-do-in-sri-lanka-blog/" target="_blank" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-logo">JasperWild</div>
+            <div class="social-footer">
+                <!-- Removed Twitter, Youtube. Added TripAdvisor, Booking.com -->
+                <a href="#" onclick="showToast('Opening Facebook')"><i class="fab fa-facebook-f"></i></a>
+                <!-- Footer TripAdvisor (Semi-transparent BG + White T) -->
+                <a href="#" class="social-footer tripadvisor" onclick="showToast('Opening TripAdvisor')"><span class="ta-letter">T</span></a>
+                <a href="#" onclick="showToast('Opening Booking.com')"><i class="fas fa-calendar-check"></i></a>
+                <a href="#" onclick="showToast('Opening WhatsApp')"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>123 Adventure Lane, Udawalawa National Park, Sri Lanka</p>
+            <p>info@safarilife.com | +94 700 000 000</p>
+            <div class="copyright">
+                &copy; 2026 JasperWild Adventures. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. Preloader Logic ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1500);
+        });
+
+        // --- 2. Mobile Menu Logic ---
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // --- 3. Toast Notification Logic ---
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // --- 4. Hero Slider Logic with Dots ---
+        const slidesData = [
+            { img: 'https://picsum.photos/seed/safari_lion/1920/1080' },
+            { img: 'https://picsum.photos/seed/safari_giraffe/1920/1080' },
+            { img: 'https://picsum.photos/seed/safari_sunset/1920/1080' },
+            { img: 'https://picsum.photos/seed/safari_jeep/1920/1080' },
+            { img: 'https://picsum.photos/seed/safari_camp/1920/1080' }
+        ];
+
+        const sliderWrapper = document.getElementById('slider-wrapper');
+        const dotsContainer = document.getElementById('slider-dots');
+        
+        let currentSlide = 0;
+        const totalSlides = slidesData.length;
+        const slideInterval = 5000; 
+        let autoSlideInterval;
+
+        function initSlider() {
+            // Create Slides
+            sliderWrapper.innerHTML = ''; 
+            slidesData.forEach((data, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.classList.add('slide');
+                if(index === 0) slideDiv.classList.add('active');
+                slideDiv.innerHTML = `<img src="${data.img}" alt="Safari Slide ${index + 1}">`;
+                sliderWrapper.appendChild(slideDiv);
+            });
+
+            // Create Dots
+            dotsContainer.innerHTML = '';
+            for(let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if(i === 0) dot.classList.add('active');
+                
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetInterval();
+                });
+                
+                dotsContainer.appendChild(dot);
+            }
+            
+            startAutoSlide();
+        }
+
+        function updateDots(index) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            updateDots(currentSlide);
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % totalSlides;
+            goToSlide(nextIndex);
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, slideInterval);
+        }
+
+        function resetInterval() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        initSlider();
+
+        // --- 5. Scroll Animations (Retriggering) ---
+        const observerOptions = {
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Add active class when entering
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // Remove active class when leaving (This makes it animate EVERY time you scroll)
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-zoom');
+        revealElements.forEach(el => observer.observe(el));
+
+        // --- 6. Header Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
+                header.style.height = "70px";
+            } else {
+                header.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+                header.style.height = "80px";
+            }
+        });
+    </script>
+</body>
+</html>
