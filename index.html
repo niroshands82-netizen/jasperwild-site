@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline';">
     
     <!-- SEO Optimization -->
     <title>UDAWALAWA SAFARI | Sri Lanka Wildlife Tours - SafariLife</title>
@@ -58,6 +59,7 @@
         a {
             text-decoration: none;
             color: inherit;
+            transition: color 0.3s;
         }
 
         ul {
@@ -260,7 +262,6 @@
             position: relative;
             font-size: 1rem;
             color: var(--secondary-color);
-            transition: color 0.3s;
         }
 
         .nav-link::after {
@@ -536,6 +537,7 @@
         .card-img {
             height: 250px;
             overflow: hidden;
+            background-color: #eee; /* Placeholder bg while loading */
         }
 
         .card-img img {
@@ -556,13 +558,9 @@
             flex-direction: column;
         }
 
+        /* Removed card-meta styles related to layout adjustment as content is removed */
         .card-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--primary-color);
-            font-weight: 600;
             margin-bottom: 10px;
-            font-size: 0.9rem;
         }
 
         .card-title {
@@ -576,6 +574,7 @@
             margin-bottom: 20px;
             font-size: 0.95rem;
             flex-grow: 1;
+            font-weight: bold; /* Updated to Bold */
         }
         
         /* --- Blog Section --- */
@@ -609,6 +608,7 @@
         .blog-img {
             height: 200px;
             overflow: hidden;
+            background-color: #eee; /* Placeholder bg while loading */
         }
 
         .blog-img img {
@@ -821,32 +821,6 @@
                 padding-right: 20px;
             }
         }
-
-        /* Notification Toast */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 4px;
-            padding: 16px;
-            position: fixed;
-            z-index: 2000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-size: 17px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            opacity: 0;
-            transition: opacity 0.5s, bottom 0.5s;
-        }
-
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
-        }
     </style>
 </head>
 <body>
@@ -861,9 +835,6 @@
         </div>
     </div>
 
-    <!-- Notification Toast -->
-    <div id="toast">Connecting to Social Media...</div>
-
     <!-- Header -->
     <header id="main-header">
         <div class="container nav-container">
@@ -875,16 +846,25 @@
                 <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="#packages" class="nav-link">Packages</a></li>
                 <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                
+                <!-- Gallery Button -->
+                <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                
+                <!-- NEW BUTTON: Reviews (Opens reviews.html in current tab) -->
+                <li class="nav-item"><a href="reviews.html" class="nav-link">Reviews</a></li>
+                
                 <li class="nav-item"><a href="#blog" class="nav-link">Blogs</a></li>
                 <li class="nav-item"><a href="#footer" class="nav-link">Contact</a></li>
                 
-                <!-- Social Buttons (Visible on Desktop AND Mobile) -->
+                <!-- Social Buttons (Linked to WA and FB) -->
                 <li class="nav-item social-item">
                     <div class="social-icons">
-                        <a href="#" class="social-btn whatsapp" onclick="showToast('Opening WhatsApp')" data-name="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="social-btn facebook" onclick="showToast('Opening Facebook')" data-name="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-btn booking" onclick="showToast('Opening Booking.com')" data-name="Booking.com"><i class="fas fa-calendar-check"></i></a>
-                        <!-- TripAdvisor REMOVED FROM HEADER -->
+                        <!-- WhatsApp Linked to +94 74 077 4588 -->
+                        <a href="https://wa.me/94740774588" class="social-btn whatsapp" target="_blank" data-name="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <!-- Facebook Linked to specific URL -->
+                        <a href="https://www.facebook.com/share/1AcCHoHruN/" class="social-btn facebook" target="_blank" data-name="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <!-- Booking.com (Placeholder link as requested) -->
+                        <a href="#" class="social-btn booking" onclick="return false;" data-name="Booking.com"><i class="fas fa-calendar-check"></i></a>
                     </div>
                 </li>
             </ul>
@@ -939,51 +919,45 @@
                 <!-- Package 1 -->
                 <div class="package-card reveal-up">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/elephant/600/400" alt="Udawalawa Elephant Safari">
+                        <!-- IMAGE REPLACED: Local path 'images/pkg-savanna.webp' -->
+                        <img src="images/pkg-savanna.webp" alt="4 Hours Package">
                     </div>
                     <div class="card-content">
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 5 Days</span>
-                            <span><i class="fas fa-tag"></i> $1,200</span>
-                        </div>
-                        <h3 class="card-title">Savanna Explorer</h3>
-                        <p class="card-desc">A classic journey through the open plains. See elephants, lions, and giraffes in their natural habitat.</p>
+                        <!-- Removed card-meta div as price is removed -->
+                        <h3 class="card-title"><span style="font-size: 1.3em; color: black;">4</span> Hours Package</h3>
+                        <p class="card-desc">Perfect for a short yet exciting wildlife experience. Explore the park’s highlights, spot elephants, birds, and other wildlife, and enjoy nature in a limited time frame.</p>
                         <!-- Changed to Link with Query Parameter -->
-                        <a href="booking.html?package=Savanna%20Explorer" class="btn" style="text-align: center;">Book Now</a>
+                        <a href="booking.html?package=4%20Hours%20Package" class="btn" style="text-align: center;">Book Now</a>
                     </div>
                 </div>
 
                 <!-- Package 2 -->
                 <div class="package-card reveal-up">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/lion/600/400" alt="Udawalawa Predator Safari">
+                        <!-- IMAGE REPLACED: Local path 'images/pkg-predator.webp' -->
+                        <img src="images/pkg-predator.webp" alt="6 Hours Package">
                     </div>
                     <div class="card-content">
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 7 Days</span>
-                            <span><i class="fas fa-tag"></i> $1,800</span>
-                        </div>
-                        <h3 class="card-title">Predator Special</h3>
-                        <p class="card-desc">Dive deep into the territory of the big cats. Includes night drives and tracking experiences.</p>
+                        <!-- Removed card-meta div as price is removed -->
+                        <h3 class="card-title"><span style="font-size: 1.3em; color: black;">6</span> Hours Package</h3>
+                        <p class="card-desc">A deeper safari adventure that allows more time to explore diverse landscapes and wildlife. Great for animal lovers who want better chances to see rare species and capture memorable photos.</p>
                         <!-- Changed to Link with Query Parameter -->
-                        <a href="booking.html?package=Predator%20Special" class="btn" style="text-align: center;">Book Now</a>
+                        <a href="booking.html?package=6%20Hours%20Package" class="btn" style="text-align: center;">Book Now</a>
                     </div>
                 </div>
 
                 <!-- Package 3 -->
                 <div class="package-card reveal-up">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/river/600/400" alt="Udawalawa River Safari">
+                        <!-- IMAGE REPLACED: Local path 'images/pkg-river.webp' -->
+                        <img src="images/pkg-river.webp" alt="Full Day (11 Hours) Package">
                     </div>
                     <div class="card-content">
-                        <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 3 Days</span>
-                            <span><i class="fas fa-tag"></i> $950</span>
-                        </div>
-                        <h3 class="card-title">Luxury River Escape</h3>
-                        <p class="card-desc">Relax in high-end lodges overlooking the river. Perfect for couples and relaxation seekers.</p>
+                        <!-- Removed card-meta div as price is removed -->
+                        <h3 class="card-title">Full Day (<span style="font-size: 1.3em; color: black;">11</span> Hours) Package</h3>
+                        <p class="card-desc">The ultimate wildlife safari experience. Spend the entire day immersed in nature, covering more areas of the park with maximum wildlife sightings.</p>
                         <!-- Changed to Link with Query Parameter -->
-                        <a href="booking.html?package=Luxury%20River%20Escape" class="btn" style="text-align: center;">Book Now</a>
+                        <a href="booking.html?package=Full%20Day%20(11%20Hours)%20Package" class="btn" style="text-align: center;">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -1002,7 +976,8 @@
                 <!-- Blog 1 -->
                 <div class="blog-card reveal-up">
                     <div class="blog-img">
-                        <img src="https://picsum.photos/seed/sunset/600/400" alt="Sunset Safari">
+                        <!-- IMAGE REPLACED: Local path 'images/blog-1.webp' -->
+                        <img src="images/blog-1.webp" alt="Sunset Safari">
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title">Golden Hour Magic</h3>
@@ -1014,7 +989,8 @@
                 <!-- Blog 2 -->
                 <div class="blog-card reveal-up">
                     <div class="blog-img">
-                        <img src="https://picsum.photos/seed/jeep/600/400" alt="Packing Tips">
+                        <!-- IMAGE REPLACED: Local path 'images/blog-2.webp' -->
+                        <img src="images/blog-2.webp" alt="Packing Tips">
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title">What to Pack</h3>
@@ -1026,7 +1002,8 @@
                 <!-- Blog 3 -->
                 <div class="blog-card reveal-up">
                     <div class="blog-img">
-                        <img src="https://picsum.photos/seed/zebra/600/400" alt="Sri Lanka">
+                        <!-- IMAGE REPLACED: Local path 'images/blog-3.webp' -->
+                        <img src="images/blog-3.webp" alt="Sri Lanka">
                     </div>
                     <div class="blog-content">
                         <h3 class="blog-title">Wonder of Asia</h3>
@@ -1046,15 +1023,30 @@
         <div class="container">
             <div class="footer-logo">JasperWild</div>
             <div class="social-footer">
-                <!-- Removed Twitter, Youtube. Added TripAdvisor, Booking.com -->
-                <a href="#" onclick="showToast('Opening Facebook')"><i class="fab fa-facebook-f"></i></a>
+                <!-- Social Icons Linked -->
+                <a href="https://www.facebook.com/share/1AcCHoHruN/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <!-- Footer TripAdvisor (Semi-transparent BG + White T) -->
-                <a href="#" class="social-footer tripadvisor" onclick="showToast('Opening TripAdvisor')"><span class="ta-letter">T</span></a>
-                <a href="#" onclick="showToast('Opening Booking.com')"><i class="fas fa-calendar-check"></i></a>
-                <a href="#" onclick="showToast('Opening WhatsApp')"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="tripadvisor" onclick="return false;"><span class="ta-letter">T</span></a>
+                <!-- Booking.com -->
+                <a href="#" onclick="return false;"><i class="fas fa-calendar-check"></i></a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/94740774588" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p>123 Adventure Lane, Udawalawa National Park, Sri Lanka</p>
-            <p>info@safarilife.com | +94 700 000 000</p>
+            
+            <!-- Updated Footer Details -->
+            <p>Jasperwildsafari, Dakunu-Ela Road, Udawalawa</p>
+            <p style="margin-top: 10px;">
+                <!-- Clickable Email -->
+                <a href="mailto:Jasperwildsafari@gmail.com" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5);">
+                    Jasperwildsafari@gmail.com
+                </a> 
+                <span style="margin: 0 10px;">|</span> 
+                <!-- Clickable Phone -->
+                <a href="tel:+94717153994" style="color: inherit; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5);">
+                    +94717153994
+                </a>
+            </p>
+            
             <div class="copyright">
                 &copy; 2026 JasperWild Adventures. All Rights Reserved.
             </div>
@@ -1088,21 +1080,14 @@
             });
         });
 
-        // --- 3. Toast Notification Logic ---
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
-
-        // --- 4. Hero Slider Logic with Dots ---
+        // --- 3. Hero Slider Logic with Dots ---
+        // NOTE: Updated to use local paths .webp
         const slidesData = [
-            { img: 'https://picsum.photos/seed/safari_lion/1920/1080' },
-            { img: 'https://picsum.photos/seed/safari_giraffe/1920/1080' },
-            { img: 'https://picsum.photos/seed/safari_sunset/1920/1080' },
-            { img: 'https://picsum.photos/seed/safari_jeep/1920/1080' },
-            { img: 'https://picsum.photos/seed/safari_camp/1920/1080' }
+            { img: 'images/hero-1.webp' },
+            { img: 'images/hero-2.webp' },
+            { img: 'images/hero-3.webp' },
+            { img: 'images/hero-4.webp' },
+            { img: 'images/hero-5.webp' }
         ];
 
         const sliderWrapper = document.getElementById('slider-wrapper');
@@ -1172,7 +1157,7 @@
 
         initSlider();
 
-        // --- 5. Scroll Animations (Retriggering) ---
+        // --- 4. Scroll Animations (Retriggering) ---
         const observerOptions = {
             threshold: 0.1, 
             rootMargin: "0px 0px -50px 0px"
@@ -1193,7 +1178,7 @@
         const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-zoom');
         revealElements.forEach(el => observer.observe(el));
 
-        // --- 6. Header Scroll Effect ---
+        // --- 5. Header Scroll Effect ---
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
             if (window.scrollY > 50) {

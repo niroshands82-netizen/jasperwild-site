@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline';">
     <title>Book Your Safari - JasperWild</title>
     
     <!-- Google Fonts -->
@@ -37,7 +38,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: #333;
-            background-color: var(--page-bg); /* Applied Beige Here */
+            background-color: var(--page-bg); 
             line-height: 1.6;
         }
 
@@ -160,6 +161,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
         }
 
         .package-card:hover {
@@ -185,21 +188,52 @@
 
         .card-content {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-meta {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Align price to right since time is removed */
             color: var(--primary-color);
             font-weight: 600;
             margin-bottom: 10px;
             font-size: 0.9rem;
         }
 
+        /* Price Structure for Discounted Items */
+        .price-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Align to right */
+            line-height: 1.2;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #e74c3c; /* Red */
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .current-price {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .normal-price {
+             font-size: 1.4rem;
+             font-weight: 700;
+             color: var(--primary-color);
+        }
+
         .card-title {
             font-size: 1.4rem;
             margin-bottom: 10px;
             color: var(--secondary-color);
+            line-height: 1.3;
         }
 
         .card-desc {
@@ -208,7 +242,23 @@
             font-size: 0.95rem;
         }
 
+        /* List styles for descriptions */
+        .card-desc ul, .extra-info ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+            color: #666;
+        }
+
+        .extra-info p, .extra-info li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            color: #555;
+            font-weight: 500;
+        }
+
         .btn {
+            margin-top: auto; /* Push button to bottom */
             display: inline-block;
             width: 100%;
             padding: 12px;
@@ -229,7 +279,7 @@
         /* --- Section 2: Booking Form --- */
         #booking {
             padding: 80px 20px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/seed/jungleform/1920/1080');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('image/package.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -261,7 +311,6 @@
             color: #666;
         }
 
-        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
@@ -297,13 +346,11 @@
             background-color: #fff;
         }
 
-        /* --- Date Picker Styling --- */
         input[type="date"] {
             cursor: pointer;
-            min-height: 46px; /* Consistent height */
+            min-height: 46px; 
         }
 
-        /* Tinting the calendar icon to match the theme */
         input[type="date"]::-webkit-calendar-picker-indicator {
             opacity: 0.6;
             filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(357deg) brightness(91%) contrast(87%);
@@ -311,7 +358,6 @@
             height: 20px;
             position: relative;
             margin-left: 10px;
-            /* Removed pointer-events: none; to fix clicking issue */
         }
 
         .selected-package-badge {
@@ -407,48 +453,80 @@
                 <!-- Package 1 -->
                 <div class="package-card reveal-element fade-up">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/elephant/600/400" alt="Savanna Explorer">
+                        <img src="image/savanna.webp" alt="4 Hours Package">
                     </div>
                     <div class="card-content">
                         <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 5 Days</span>
-                            <span><i class="fas fa-tag"></i> $1,200</span>
+                            <span class="normal-price">$ 65</span>
                         </div>
-                        <h3 class="card-title">Savanna Explorer</h3>
-                        <p class="card-desc">A classic journey through the open plains. See elephants, lions, and giraffes in their natural habitat.</p>
-                        <button class="btn book-now-btn" data-package="Savanna Explorer">Book This Package</button>
+                        <!-- Color of "4" changed to Black -->
+                        <h3 class="card-title"><span style="font-size: 1.3em; color: black;">4</span> Hours Package</h3>
+                        
+                        <div class="card-desc">
+                            <ul>
+                                <li><strong>Morning OR Evening Safari Ride</strong></li>
+                            </ul>
+                        </div>
+
+                        <button class="btn book-now-btn" data-package="4 Hours Package">Book This Package</button>
                     </div>
                 </div>
 
                 <!-- Package 2 -->
                 <div class="package-card reveal-element fade-up" style="transition-delay: 0.1s;">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/lion/600/400" alt="Predator Special">
+                        <img src="image/predator.webp" alt="6 Hours Package">
                     </div>
                     <div class="card-content">
                         <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 7 Days</span>
-                            <span><i class="fas fa-tag"></i> $1,800</span>
+                            <div class="price-wrapper">
+                                <span class="old-price">$80</span>
+                                <span class="current-price">$75</span>
+                            </div>
                         </div>
-                        <h3 class="card-title">Predator Special</h3>
-                        <p class="card-desc">Dive deep into the territory of the big cats. Includes night drives and tracking experiences.</p>
-                        <button class="btn book-now-btn" data-package="Predator Special">Book This Package</button>
+                        
+                        <h3 class="card-title">6 Hours Package</h3>
+                        
+                        <div class="card-desc">
+                            <!-- Removed description text -->
+                            <div class="extra-info">
+                                <ul>
+                                    <li>Food and Beverage Included</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button class="btn book-now-btn" data-package="6 Hours Package">Book This Package</button>
                     </div>
                 </div>
 
                 <!-- Package 3 -->
                 <div class="package-card reveal-element fade-up" style="transition-delay: 0.2s;">
                     <div class="card-img">
-                        <img src="https://picsum.photos/seed/river/600/400" alt="Luxury Escape">
+                        <img src="image/river.webp" alt="Full Day Package">
                     </div>
                     <div class="card-content">
                         <div class="card-meta">
-                            <span><i class="far fa-clock"></i> 3 Days</span>
-                            <span><i class="fas fa-tag"></i> $950</span>
+                            <div class="price-wrapper">
+                                <span class="old-price">$105</span>
+                                <span class="current-price">$100</span>
+                            </div>
                         </div>
-                        <h3 class="card-title">Luxury River Escape</h3>
-                        <p class="card-desc">Relax in high-end lodges overlooking the river. Perfect for couples and relaxation seekers.</p>
-                        <button class="btn book-now-btn" data-package="Luxury River Escape">Book This Package</button>
+
+                        <!-- "11" font size increased -->
+                        <h3 class="card-title">Full Day (<span style="font-size: 1.3em;">11</span> Hours) Package</h3>
+
+                        <div class="card-desc">
+                            <!-- Removed description text -->
+                            <div class="extra-info">
+                                <ul>
+                                    <li>Food and Beverage</li>
+                                    <li>Dinner</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button class="btn book-now-btn" data-package="Full Day (11 Hours) Package">Book This Package</button>
                     </div>
                 </div>
             </div>
@@ -511,9 +589,9 @@
                         <label for="package-select">Select Package</label>
                         <select id="package-select" name="package" required>
                             <option value="" disabled selected>Choose a package...</option>
-                            <option value="Savanna Explorer">Savanna Explorer (5 Days)</option>
-                            <option value="Predator Special">Predator Special (7 Days)</option>
-                            <option value="Luxury River Escape">Luxury River Escape (3 Days)</option>
+                            <option value="4 Hours Package">4 Hours Package</option>
+                            <option value="6 Hours Package">6 Hours Package</option>
+                            <option value="Full Day (11 Hours) Package">Full Day (11 Hours) Package</option>
                             <option value="Custom Inquiry">Custom Inquiry</option>
                         </select>
                     </div>
@@ -546,11 +624,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- 1. Date Logic (New) ---
+            // --- 1. Date Logic ---
             const dateFrom = document.getElementById('date-from');
             const dateTo = document.getElementById('date-to');
             
-            // Helper to get today's date in YYYY-MM-DD format
             const getTodayDate = () => {
                 const today = new Date();
                 const year = today.getFullYear();
@@ -559,28 +636,23 @@
                 return `${year}-${month}-${day}`;
             };
 
-            // Prevent selecting past dates for "From"
             const today = getTodayDate();
             dateFrom.setAttribute('min', today);
             dateTo.setAttribute('min', today);
 
-            // Update "To" date minimum when "From" date changes
             dateFrom.addEventListener('change', (e) => {
                 const startDate = e.target.value;
-                // Set the "To" date min to the selected "From" date
                 dateTo.setAttribute('min', startDate);
                 
-                // Optional: If the user had already selected a "To" date that is now invalid,
-                // you could clear it here, but standard browser validation usually handles the visual error.
                 if (dateTo.value && dateTo.value < startDate) {
-                    dateTo.value = ''; // Clear invalid date
+                    dateTo.value = ''; 
                 }
             });
 
 
-            // --- 2. Auto-Select Package from URL (External Link) ---
+            // --- 2. Auto-Select Package from URL ---
             const urlParams = new URLSearchParams(window.location.search);
-            const selectedPackage = urlParams.get('p'); // ?p=Savanna%20Explorer
+            const selectedPackage = urlParams.get('p'); 
             const packageSelect = document.getElementById('package-select');
             const badge = document.getElementById('packageBadge');
             const badgeName = document.getElementById('packageNameDisplay');
@@ -625,7 +697,7 @@
             });
 
 
-            // --- 4. REPEATING Scroll Animations (Intersection Observer) ---
+            // --- 4. Scroll Animations ---
             const observerOptions = {
                 threshold: 0.15,
                 rootMargin: "0px 0px -50px 0px"
@@ -646,7 +718,7 @@
             revealElements.forEach(el => observer.observe(el));
 
 
-            // --- 5. Form Submission Logic (FIXED) ---
+            // --- 5. Form Submission Logic ---
             const form = document.getElementById('bookingForm');
             const notification = document.getElementById('notification');
             const submitBtn = document.getElementById('submitBtn');
@@ -669,11 +741,9 @@
                     }
                 }).then(response => {
                     if (response.ok) {
-                        // Success logic
                         notification.classList.add('show');
                         form.reset();
                         
-                        // Reset date constraints to today
                         dateFrom.setAttribute('min', getTodayDate());
                         dateTo.setAttribute('min', getTodayDate());
 
@@ -683,7 +753,6 @@
                             notification.classList.remove('show');
                         }, 4000);
                     } else {
-                        // Error from Formspree
                         response.json().then(data => {
                             if (Object.hasOwn(data, 'errors')) {
                                 alert(data["errors"].map(error => error["message"]).join(", "));
@@ -693,10 +762,8 @@
                         })
                     }
                 }).catch(error => {
-                    // Network error
                     alert("Oops! There was a problem submitting your form");
                 }).finally(() => {
-                    // Reset button state regardless of outcome
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.disabled = false;
                     submitBtn.style.opacity = '1';

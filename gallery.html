@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline';">
+    <title>WildLife Gallery Showcase</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #B8860B; 
+            --accent-hover: #8a6203;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --transition-speed: 0.4s;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Top Navigation Bar --- */
+        .main-nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn span {
+            margin-right: 8px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-btn:hover span {
+            transform: translateX(-4px);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header Section with Parallax --- */
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            will-change: transform, opacity;
+        }
+
+        .gallery-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .gallery-header h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-header h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .gallery-header p {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-top: 15px;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+        }
+
+        .gallery-header p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Filter Controls --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+        }
+
+        .filter-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #e0e0e0;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 50px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4);
+        }
+
+        /* --- Gallery Grid --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        /* --- Gallery Card/Item --- */
+        .gallery-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .gallery-item:nth-child(1) { transition-delay: 0.05s; }
+        .gallery-item:nth-child(2) { transition-delay: 0.1s; }
+        .gallery-item:nth-child(3) { transition-delay: 0.15s; }
+        .gallery-item:nth-child(4) { transition-delay: 0.2s; }
+        .gallery-item:nth-child(5) { transition-delay: 0.25s; }
+        .gallery-item:nth-child(6) { transition-delay: 0.3s; }
+
+        .gallery-item.hide {
+            display: none; 
+        }
+
+        @keyframes filterFadeIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .gallery-item.animate-in {
+            animation: filterFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background-color: #eee; /* Placeholder bg while image loads */
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover .image-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* --- LIGHTBOX WITH ANIMATION --- */
+        .lightbox {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 4px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: scale(0.3); 
+        }
+
+        .lightbox.open img {
+            animation: enlargeBounce 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes enlargeBounce {
+            0% { opacity: 0; transform: scale(0.3) translateY(100px); }
+            50% { opacity: 1; transform: scale(1.05) translateY(-10px); }
+            70% { transform: scale(0.98) translateY(0px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+            z-index: 1001;
+        }
+
+        .close-lightbox:hover {
+            color: var(--accent-color);
+            transform: rotate(90deg);
+        }
+
+        /* --- BACK TO TOP BUTTON --- */
+        #backToTop {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #backToTop:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-header h1 { font-size: 2rem; }
+            .filter-container { gap: 10px; margin-bottom: 40px; }
+            .filter-btn { padding: 8px 16px; font-size: 0.8rem; }
+            .close-lightbox { top: 20px; right: 20px; font-size: 30px; }
+            #backToTop { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
+            .nav-btn { padding: 8px 16px; font-size: 0.8rem; }
+            
+            @keyframes enlargeBounce {
+                0% { opacity: 0; transform: scale(0.1); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <!-- Back to Home Button -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-btn" title="Return to Homepage">
+                <span>&larr;</span> Back to Home
+            </a>
+        </nav>
+
+        <!-- Header Section -->
+        <section class="gallery-header" id="galleryHeader">
+            <h1>WildLife Gallery</h1>
+            <p>Captured moments from the heart of the jungle</p>
+        </section>
+
+        <!-- Filter Categories -->
+        <nav class="filter-container">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="elephant">Elephant</button>
+            <button class="filter-btn" data-filter="birds">Birds</button>
+            <button class="filter-btn" data-filter="deer">Deer</button>
+            <button class="filter-btn" data-filter="landscapes">Landscapes</button>
+        </nav>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-grid">
+            
+            <!-- Category: Elephant (Photo 1) -->
+            <article class="gallery-item elephant">
+                <div class="category-badge">Elephant</div>
+                <div class="image-wrapper">
+                    <img src="images/elephantphoto1.webp" alt="Majestic Elephant">
+                    <div class="overlay">
+                        <h3>Gentle Giant</h3>
+                        <p>Wandering through the tall grass.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Elephant (Photo 2) -->
+            <article class="gallery-item elephant">
+                <div class="category-badge">Elephant</div>
+                <div class="image-wrapper">
+                    <img src="images/elephantphoto2.webp" alt="Elephant herd">
+                    <div class="overlay">
+                        <h3>River Crossing</h3>
+                        <p>The herd moving together.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Birds (Photo 1) -->
+            <article class="gallery-item birds">
+                <div class="category-badge">Birds</div>
+                <div class="image-wrapper">
+                    <img src="images/birdsphoto1.webp" alt="Tropical bird">
+                    <div class="overlay">
+                        <h3>Tropical Flight</h3>
+                        <p>Vibrant feathers against the sky.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Birds (Photo 2) -->
+            <article class="gallery-item birds">
+                <div class="category-badge">Birds</div>
+                <div class="image-wrapper">
+                    <img src="images/birdsphoto2.webp" alt="Owl">
+                    <div class="overlay">
+                        <h3>Silent Watcher</h3>
+                        <p>Observing the forest from above.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Deer (Photo 1) -->
+            <article class="gallery-item deer">
+                <div class="category-badge">Deer</div>
+                <div class="image-wrapper">
+                    <img src="images/deerphoto1.webp" alt="Deer in fog">
+                    <div class="overlay">
+                        <h3>Morning Mist</h3>
+                        <p>A stag emerging from the fog.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Deer (Photo 2) -->
+            <article class="gallery-item deer">
+                <div class="category-badge">Deer</div>
+                <div class="image-wrapper">
+                    <img src="images/deerphoto2.webp" alt="Fawn">
+                    <div class="overlay">
+                        <h3>Young One</h3>
+                        <p>Curious fawn exploring.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Landscapes (Photo 1) -->
+            <article class="gallery-item landscapes">
+                <div class="category-badge">Landscapes</div>
+                <div class="image-wrapper">
+                    <img src="images/landscapesphoto1.webp" alt="Dense forest">
+                    <div class="overlay">
+                        <h3>Deep Jungle</h3>
+                        <p>Where the wild thrives.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Landscapes (Photo 2) -->
+            <article class="gallery-item landscapes">
+                <div class="category-badge">Landscapes</div>
+                <div class="image-wrapper">
+                    <img src="images/landscapesphoto2.webp" alt="Jungle river">
+                    <div class="overlay">
+                        <h3>Sunset Flow</h3>
+                        <p>The river reflecting the dusk light.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category: Elephant (Photo 3) -->
+            <article class="gallery-item elephant">
+                <div class="category-badge">Elephant</div>
+                <div class="image-wrapper">
+                    <img src="images/elephantphoto3.webp" alt="Baby elephant">
+                    <div class="overlay">
+                        <h3>Playful Spirit</h3>
+                        <p>Joy in the mud.</p>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+
+    <!-- Back To Top Button -->
+    <button id="backToTop" title="Go to top">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. SCROLL PARALLAX & REVEAL ANIMATION ---
+            const galleryHeader = document.querySelector('.gallery-header');
+            const backToTopBtn = document.getElementById('backToTop');
+
+            // Scroll Event Listener for Parallax Header and Back-to-Top button
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                
+                // Parallax Effect on Header
+                if (scrollY < 600) {
+                    galleryHeader.style.transform = `translateY(${scrollY * 0.4}px)`;
+                    galleryHeader.style.opacity = 1 - (scrollY / 500);
+                }
+
+                // Back to Top Button Visibility
+                if (scrollY > 400) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+
+            // Click to scroll top
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+
+            // --- 2. INTERSECTION OBSERVER FOR SCROLL REVEAL ---
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe Header & Filters
+            document.querySelectorAll('.gallery-header h1, .gallery-header p, .filter-container').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Observe Gallery Items with dynamic delays
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+                observer.observe(item);
+            });
+
+
+            // --- 3. FILTER ANIMATIONS ---
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+                    let delayCounter = 0;
+
+                    galleryItems.forEach(item => {
+                        item.classList.remove('animate-in');
+                        item.style.animationDelay = '0s';
+                        
+                        if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                            item.classList.remove('hide');
+                            
+                            setTimeout(() => {
+                                item.classList.add('animate-in');
+                                item.style.animationDelay = `${delayCounter * 0.1}s`;
+                            }, 50);
+                            
+                            delayCounter++;
+                        } else {
+                            item.classList.add('hide');
+                        }
+                    });
+                });
+            });
+
+
+            // --- 4. LIGHTBOX & ANIMATION ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.querySelector('.close-lightbox');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const src = img.src; 
+                    
+                    lightboxImg.src = src;
+                    lightbox.classList.remove('open');
+                    requestAnimationFrame(() => {
+                        lightbox.classList.add('open');
+                    });
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                lightbox.classList.remove('open');
+            });
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('open');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+                    lightbox.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
